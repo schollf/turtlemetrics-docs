@@ -36,10 +36,10 @@ The **TurtleMetrics Risk Tool** is a free NinjaTrader indicator that captures yo
 
 <Steps>
   <Step title="Enter a position">
-    When you open a trade in NinjaTrader, the Risk Tool automatically detects your new position and draws a horizontal **stop loss line** on the chart. If you're using an ATM strategy, the line snaps to your ATM stop price automatically.
+    When you open a trade in NinjaTrader, the Risk Tool automatically detects your new position and draws a horizontal **stop loss line** on the chart. If you're using an ATM strategy, the line snaps to your ATM stop price automatically. Without an ATM, the line starts at your entry price — drag it to your desired stop loss level.
   </Step>
   <Step title="Adjust the line if needed">
-    The stop loss line is draggable. If you're not using an ATM, drag it to where your actual stop loss is. The indicator displays the distance from entry in both points and ticks as you move it.
+    The stop loss line is draggable. As you move it, the indicator displays the distance from entry in both **points and ticks** next to the line, so you always know exactly how much risk you're taking. If the line is on the wrong side of entry (e.g., above entry for a long), it shows "SL: invalid (wrong side)" to help you catch mistakes.
   </Step>
   <Step title="Click Confirm SL">
     Once the line is in the right place, click the **Confirm SL** button on the chart. The stop loss price is locked in and sent to TurtleMetrics when the trade closes.
@@ -52,42 +52,67 @@ That's it — three steps, a few seconds of effort per trade, and TurtleMetrics 
 
 The Risk Tool is installed separately from the main TurtleMetrics Sync AddOn:
 
-1. Download the Risk Tool indicator from your TurtleMetrics account
+1. Download the Risk Tool indicator from your [TurtleMetrics account](https://app.turtlemetrics.com/management/indicator)
 2. In NinjaTrader, go to **Tools → Import → NinjaScript Add-On** and select the downloaded file
-3. Add the indicator to your chart: right-click the chart → **Indicators** → find **TurtleMetrics - Risk Tool** → click **Add** → **OK**
+3. Restart NinjaTrader
+4. Add the indicator to your chart: right-click the chart → **Indicators** → find **TurtleMetrics - Risk Tool** → click **Add** → **OK**
 
 <Info>
-  The Risk Tool requires the TurtleMetrics Sync AddOn to be installed. It communicates the confirmed stop loss to the AddOn, which then sends it along with your trade data to TurtleMetrics.
+  The Risk Tool requires the TurtleMetrics Sync AddOn to be installed and running. It communicates the confirmed stop loss to the AddOn via a shared data store, which then sends it along with your trade data to TurtleMetrics.
 </Info>
 
 ### Customization options
 
-The Risk Tool is fully customizable from NinjaTrader's indicator settings:
+The Risk Tool is fully customizable from NinjaTrader's indicator settings. Settings are grouped into two sections:
+
+**Stop Loss Line**
 
 | Setting | What it controls | Default |
 |---|---|---|
 | **Line Color** | Color of the stop loss line | Orange-red |
 | **Line Style** | Solid, dashed, or dotted | Dashed |
 | **Line Width** | Thickness of the line (1–5) | 2 |
-| **Text Side** | Which side of the chart shows the SL distance label | Left |
+| **Text Side** | Which side of the chart shows the SL distance label | Right |
 | **Line After Confirm** | What happens to the line after you confirm: Remove, Dim, or Keep Visible | Remove |
+
+**Button**
+
+| Setting | What it controls | Default |
+|---|---|---|
 | **Button Position** | Corner of the chart for the Confirm SL button | Top Right |
-| **Horizontal/Vertical Offset** | Fine-tune the button position in pixels | 80 / 50 |
+| **Horizontal Offset** | Distance in pixels from the left/right edge (0–500) | 80 |
+| **Vertical Offset** | Distance in pixels from the top/bottom edge (0–500) | 20 |
 
 ### ATM strategy integration
 
-If you trade with NinjaTrader ATM strategies, the Risk Tool automatically detects your ATM stop loss order and places the SL line at that price. If your ATM stop moves (trailing stop, for example), the line updates in real-time until you confirm. This means you often just need to verify the line is correct and click Confirm — no dragging needed.
+If you trade with NinjaTrader ATM strategies, the Risk Tool automatically detects your ATM stop loss order and places the SL line at that price. The label shows "SL (ATM)" so you know it's tracking the ATM stop. If your ATM stop moves (trailing stop, for example), the line updates in real-time until you confirm. This means you often just need to verify the line is correct and click Confirm — no dragging needed.
+
+### Account awareness
+
+The Risk Tool uses the account selected in NinjaTrader's Chart Trader account selector to find your position. If you switch accounts in the Chart Trader, the indicator follows. This means it works correctly whether you're trading on a single account, switching between sim and live, or using multiple prop firm accounts.
+
+### Stop loss validation
+
+The indicator validates your stop loss before accepting it:
+
+- The SL must be moved away from the entry price — confirming at entry is rejected
+- The SL must be on the correct side: below entry for longs, above entry for shorts
+- If the SL is invalid, the indicator prints a message in NinjaTrader's Output window explaining why
+
+### Applying to an existing position
+
+If you add the Risk Tool to a chart where you already have an open position, it detects the position and shows the stop loss line immediately — you don't need to wait for a new trade.
 
 ## Option 2: Manual stop loss entry
 
 If you don't want to use the indicator, you can enter stop losses manually after the fact:
 
-1. Open any trade in TurtleMetrics (from the [Calendar](/features/calendar) day view)
-2. Click **Edit Trade Details**
+1. Open any trade in TurtleMetrics (from the [Calendar](/features/calendar) day view or the [Dashboard](/features/dashboard) recent trades table)
+2. Click on the trade to open its details
 3. Enter your stop loss price in the **Stop Loss** field
 4. Save
 
-TurtleMetrics calculates the R:R from the stop loss you entered, your entry price, and your actual exit price.
+TurtleMetrics validates that the stop loss is on the correct side of entry (below for longs, above for shorts) and calculates the R:R from the stop loss, your entry price, and your actual exit price.
 
 <AccordionGroup>
   <Accordion title="When to use manual entry">
@@ -98,9 +123,15 @@ TurtleMetrics calculates the R:R from the stop loss you entered, your entry pric
   </Accordion>
 </AccordionGroup>
 
-## Reading your R:R data
+## Seeing your R:R data
 
-Once you have stop losses on your trades, R:R appears alongside your other trade details. Over time, you'll be able to see:
+Once you have stop losses on your trades, R:R appears in several places:
+
+- **Calendar day view** — Each trade shows its R:R, and the stop loss level is drawn as a line on the price chart alongside your entry and exit markers
+- **Trade details modal** — The full R:R calculation with risk and reward in points
+- **Analysis views** — R:R metrics across your setups and tags over time
+
+Over time, you'll be able to see:
 
 - **Average R:R** — Are you generally being compensated well for your risk?
 - **R:R by setup** — Which strategies produce the best risk-adjusted returns?

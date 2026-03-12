@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "linden",
+  "theme": "mint",
   "name": "TurtleMetrics Help Center",
   "colors": {
     "primary": "#6366F1",
@@ -34,6 +34,7 @@
         "pages": [
           "features/dashboard",
           "features/calendar",
+          "features/trades-list",
           "features/setups",
           "features/tags-and-categories",
           "features/risk-reward"
@@ -44,7 +45,9 @@
         "pages": [
           "features/setup-analysis",
           "features/tag-analysis",
-          "features/time-of-day-analysis"
+          "features/symbol-analysis",
+          "features/time-of-day-analysis",
+          "features/mae-mfe-analysis"
         ]
       },
       {

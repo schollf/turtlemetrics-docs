@@ -1,16 +1,20 @@
 ---
 title: "Calendar View"
 seo:
-  title: "TurtleMetrics Calendar View — Review Trading Days and Tag Trades"
-  description: "Browse your trading days, review individual trades with price charts, and assign tags and setups from the calendar view."
-description: "Review individual trading days, walk through trades, and assign setups and tags."
+  title: "TurtleMetrics Calendar View — Review Trading Days, Tag Trades, Track Risk"
+  description: "Browse your trading days, review individual trades with price charts and stop loss lines, assign tags and setups, and capture calendar screenshots."
+description: "Review individual trading days, walk through trades, and assign setups, tags, and stop losses."
 ---
 
-The calendar is where your daily trading review happens. It shows every day you traded, lets you walk through your trades one by one, and is the primary place where you assign tags and setups.
+The calendar is where your daily trading review happens. It shows every day you traded, lets you walk through your trades one by one, and is the primary place where you assign tags, setups, and stop losses.
 
 ## Browsing your trading days
 
 The calendar displays a monthly view with each trading day marked. Days with trades show a summary — how many trades you took and your P&L for that day. Click any day to open the day view.
+
+### Calendar screenshot
+
+You can capture a screenshot of the full calendar month view using the screenshot tool. This is useful for sharing your monthly results or saving a visual record of your trading month.
 
 ## The day view
 
@@ -28,23 +32,26 @@ Click on any individual trade to see its full details.
 
 For ES, MES, NQ, and MNQ trades, the day view includes **intraday price charts** with your exact entry and exit points marked. This lets you visually review how the trade played out in the context of the day's price action — where you got in, where you got out, and what happened around your trade.
 
+If a trade has a stop loss recorded (either from the [Risk Tool indicator](/features/risk-reward) or entered manually), the **stop loss level is drawn as a line on the chart** alongside your entry and exit markers. This gives you immediate visual feedback on how much risk you took relative to the price action.
+
 <Info>
   Price charts are currently available for ES/MES and NQ/MNQ only. All other futures contracts show full trade details and analytics, but without the chart overlay. We're expanding chart support to more contracts over time.
 </Info>
 
-## Assigning tags and setups
+## Editing trade details
 
-The calendar day view is where you tag your trades. For each trade:
+Click on any trade to open the trade details modal. From here you can:
 
-1. Click on the trade to open its details
-2. Select a **setup** — the strategy or pattern you used for this trade
-3. Click the tag area and assign one or more **tags** — observations about execution, market conditions, or anything else you want to track
+- **Assign a setup** — Select the strategy or pattern you used for this trade
+- **Add tags** — Tag observations about execution, market conditions, or behavior
+- **Enter a stop loss price** — Manually set your stop loss for R:R calculation
+- **Add a chart URL** — Link an external chart screenshot for reference
 
-Tags and setups are saved immediately. The whole process takes a few seconds per trade.
+The stop loss field validates that your stop is on the correct side of the entry price — below entry for longs, above entry for shorts. Once saved, TurtleMetrics calculates the [risk/reward ratio](/features/risk-reward) for that trade automatically.
 
-<Warning>
-  Tag your trades the same day while everything is fresh. Trying to remember what happened three weeks ago defeats the purpose of structured journaling.
-</Warning>
+<Info>
+  If you use the [Risk Tool indicator](/features/risk-reward) in NinjaTrader, the stop loss is captured automatically during the trade and you won't need to enter it here. Manual entry is useful for historical trades or when you forgot to confirm the SL in the indicator.
+</Info>
 
 ## Building your daily review habit
 
@@ -55,6 +62,10 @@ The most valuable thing you can do in TurtleMetrics is spend 5–10 minutes afte
 3. Assign a setup to each one
 4. Tag any notable observations — good execution, mistakes, market conditions
 5. Move on
+
+<Warning>
+  Tag your trades the same day while everything is fresh. Trying to remember what happened three weeks ago defeats the purpose of structured journaling.
+</Warning>
 
 This builds the dataset that powers all of your [setup analysis](/features/setup-analysis), [tag analysis](/features/tag-analysis), and [time-of-day insights](/features/time-of-day-analysis). The more consistently you tag, the more useful those analytics become.
 

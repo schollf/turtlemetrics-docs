@@ -1,9 +1,9 @@
 ---
 title: "Trading Metrics Explained"
 seo:
-  title: "Trading Metrics Explained — Win Rate, Profit Factor, Consistency Score & More"
+  title: "Trading Metrics Explained — Win Rate, Profit Factor, Sharpe Ratio, MAE/MFE & More"
   description: "What each trading metric in TurtleMetrics means, how it's calculated, and why it matters for your futures trading performance."
-description: "What win rate, profit factor, drawdown, and other key metrics mean and how they're calculated."
+description: "What win rate, profit factor, Sharpe ratio, drawdown, MAE/MFE, and other key metrics mean and how they're calculated."
 ---
 
 TurtleMetrics tracks several key metrics across your dashboard and analysis views. Here's what each one means, how it's calculated, and what to look for.
@@ -38,7 +38,28 @@ Profit factor is one of the most useful single metrics because it captures both 
 
 **What it is:** A measure of how stable your win rate is over time.
 
-**Why it matters:** A trader with a 55% win rate that's consistently 55% every week is in a very different position than one whose win rate swings between 20% and 90%. The consistency score helps you understand how reliable your edge is — whether your results are steady or highly variable.
+**Why it matters:** A trader with a 55% win rate that's consistently 55% every week is in a very different position than one whose win rate swings between 20% and 90%. The consistency score helps you understand how reliable your edge is — whether your results are steady or highly variable. Lower values indicate higher consistency.
+
+## Sharpe Ratio
+
+**What it is:** A measure of your risk-adjusted returns. It compares your average daily profit to the volatility (standard deviation) of those daily returns, annualized.
+
+**What to look for:**
+
+| Sharpe Ratio | Interpretation |
+|---|---|
+| Below 0 | Losing money for the risk taken |
+| 0–1.0 | Moderate risk-adjusted returns |
+| Above 1.0 | Good risk-adjusted performance |
+| Above 2.0 | Excellent — high returns relative to the variability of those returns |
+
+The Sharpe Ratio rewards consistency. Two traders can have the same total P&L, but the one with steadier daily returns will have a higher Sharpe Ratio — and a more sustainable edge.
+
+## Max Drawdown
+
+**What it is:** The largest peak-to-trough decline in your cumulative P&L during the selected period. It measures the worst losing streak you experienced.
+
+**Why it matters:** Max drawdown tells you the worst-case scenario you actually lived through. If your max drawdown is $2,000 and your total P&L is $3,000, you had to endure giving back two-thirds of your profits at some point. This is critical for understanding whether your strategy is emotionally and financially sustainable for you.
 
 ## Average P&L Per Trade
 
@@ -57,6 +78,20 @@ Profit factor is one of the most useful single metrics because it captures both 
 **What it is:** The total number of trades in the selected period, using [flat-to-flat counting](/troubleshooting/trade-count-differences).
 
 **Why it matters:** More trades means more data and more reliable metrics. It's also useful for monitoring overtrading — if your trade count is climbing but your win rate and P&L aren't keeping up, you may be forcing trades.
+
+## MAE (Maximum Adverse Excursion)
+
+**What it is:** The furthest price moved against a trade during its lifetime, measured in points. For longs, this is the lowest point below your entry; for shorts, the highest point above your entry.
+
+**Why it matters:** MAE reveals how much "heat" your trades take before you exit. High MAE on winning trades means you're getting the direction right but entering at poor prices or enduring unnecessary drawdown. High MAE on losing trades may indicate you're holding losers too long. Available for ES, MES, NQ, and MNQ trades only.
+
+## MFE (Maximum Favorable Excursion)
+
+**What it is:** The furthest price moved in your favor during a trade's lifetime, measured in points.
+
+**Why it matters:** MFE shows how much opportunity each trade offered. Compare MFE to your actual captured profit to see your exit efficiency — if MFE is consistently much larger than your captured profit, you're leaving money on the table by exiting too early. Available for ES, MES, NQ, and MNQ trades only.
+
+For a deeper dive into MAE/MFE, see the [MAE/MFE Analysis](/features/mae-mfe-analysis) page.
 
 ## How metrics work across filters
 

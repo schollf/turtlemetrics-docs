@@ -1,0 +1,67 @@
+---
+title: "Symbol Performance"
+seo:
+  title: "Symbol Performance Analysis in TurtleMetrics — Compare Results Across Contracts"
+  description: "Analyze your trading performance by futures contract. Compare win rates, profit factors, P&L, and MAE/MFE across ES, NQ, and other symbols."
+description: "Compare your performance across different futures contracts."
+---
+
+Symbol Performance breaks down your trading results by the contract you traded. If you trade multiple symbols — say ES and NQ, or a mix of minis and micros — this view shows you exactly where your edge is strongest and where you might be leaking money.
+
+## What you see
+
+Navigate to **Analysis → Symbol Performance** in the sidebar. The page shows two comparison charts and a detailed table.
+
+### Comparison charts
+
+Two bar charts at the top give you a visual comparison across all symbols you've traded in the selected period:
+
+- **Win Rate by Symbol** — Which contracts you win on most often
+- **Profit/Loss by Symbol** — Where the actual dollars are coming from (or going)
+
+These charts make it immediately obvious if one symbol is carrying your results while another is dragging them down.
+
+### Performance table
+
+Below the charts, a detailed table breaks down each symbol with:
+
+| Column | What it shows |
+|---|---|
+| **Symbol** | The root symbol (ES, MES, NQ, MNQ, etc.) |
+| **Trades** | Total trade count for that symbol |
+| **Win Rate** | Percentage of winning trades |
+| **Profit Factor** | Gross profit ÷ gross loss |
+| **Avg Win** | Average winning trade size in dollars |
+| **Avg Loss** | Average losing trade size in dollars |
+| **Avg MAE** | Average maximum adverse excursion in points (ES/MES/NQ/MNQ only) |
+| **Avg MFE** | Average maximum favorable excursion in points (ES/MES/NQ/MNQ only) |
+| **Net P&L** | Total profit or loss for that symbol |
+
+The Avg MAE and Avg MFE columns appear for symbols that have price data (ES, MES, NQ, MNQ). Other symbols show "—" for these columns.
+
+## Filtering
+
+Like all analysis views, you can filter by date range (7, 30, 90, or 365 days) and account (via the sidebar switcher). The data recalculates dynamically when you change filters.
+
+## How to use symbol analysis
+
+This view is especially useful for traders who:
+
+- **Trade both minis and micros** — Compare your performance on ES vs. MES to see if the different contract size affects your decision-making
+- **Trade multiple markets** — If you trade both S&P and Nasdaq futures, see which market suits your style better
+- **Are considering dropping a symbol** — Hard data on whether a contract is actually profitable for you, rather than relying on gut feeling
+
+<Info>
+  MAE/MFE data in the symbol table is particularly useful here, since these values are inherently symbol-specific. Two points of MAE on ES ($100) is a very different situation than two points on MES ($10).
+</Info>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card icon="crosshairs" href="/features/setup-analysis" title="Setup Analysis">
+    Compare performance by strategy instead of by symbol.
+  </Card>
+  <Card icon="chart-line" href="/features/mae-mfe-analysis" title="MAE / MFE Analysis">
+    Deep dive into how price moves for and against your trades.
+  </Card>
+</CardGroup>

@@ -1,0 +1,94 @@
+---
+title: "MAE / MFE Analysis"
+seo:
+  title: "MAE/MFE Analysis in TurtleMetrics — Are You Cutting Winners or Holding Losers?"
+  description: "Maximum Adverse Excursion and Maximum Favorable Excursion analysis for futures trades. Scatter plots, efficiency metrics, and actionable insights."
+description: "Analyze how far price moves for and against your trades to improve exits and stop placement."
+---
+
+MAE/MFE analysis answers two of the most important questions in trade management: **how far did price move against me before I exited?** and **how much of the favorable move did I actually capture?**
+
+These metrics reveal patterns that P&L alone can't show — like whether you're consistently cutting winners short, holding losers too long, or placing your stops well.
+
+## What MAE and MFE mean
+
+**MAE (Maximum Adverse Excursion)** is the furthest price moved against your trade during its lifetime, measured in points. For a long trade, it's how far price dropped below your entry before you exited. For a short, it's how far price rallied above your entry.
+
+**MFE (Maximum Favorable Excursion)** is the furthest price moved in your favor. For a long, it's the highest point above your entry. For a short, the lowest point below your entry.
+
+Both are always positive numbers — they measure distance, not direction.
+
+### Why this matters
+
+Consider two traders who both made $200 on a trade. Trader A's position never went more than 2 points against them and reached 10 points in their favor — they captured 4 points of the move. Trader B's position went 8 points against them before recovering and reaching 6 points favorable — they captured 4 points too, but endured far more pain to get there.
+
+P&L says they had identical trades. MAE/MFE tells a completely different story about risk management and execution quality.
+
+## The MAE/MFE analysis page
+
+Navigate to **Analysis → MAE / MFE** in the sidebar to access this view.
+
+### Summary cards
+
+At the top, five cards give you an overview:
+
+- **Avg MAE** — Your average adverse excursion in points. Lower is better — it means price doesn't move far against you before you exit
+- **Avg MFE** — Your average favorable excursion in points. Higher means you're taking trades that have room to move in your favor
+- **MAE:MFE Ratio** — Average MAE divided by average MFE. Below 0.5 is excellent, 0.5–1.0 is acceptable, above 1.0 means you're typically enduring more pain than gain
+- **MFE Efficiency** — What percentage of the maximum favorable move you actually captured as profit. 100% would mean perfect exits at the best price. Low values suggest you're exiting too early or giving back profits before closing
+- **Trade Count** — How many trades have MAE/MFE data in the selected period
+
+### Scatter plot
+
+The main visualization is a scatter plot where each dot represents one trade:
+
+- **X-axis** = MAE (how far price went against you)
+- **Y-axis** = MFE (how far price went in your favor)
+- **Green dots** = winning trades
+- **Red dots** = losing trades
+
+Hover over any dot to see the trade's symbol, setup, and P&L.
+
+**How to read the scatter plot:**
+
+Trades in the **top-left** (low MAE, high MFE) are your best executions — price moved in your favor without much drawdown. Trades in the **bottom-right** (high MAE, low MFE) are your worst — lots of pain with little reward. A cluster of red dots with high MAE suggests you're holding losers too long. Green dots with high MFE but low captured P&L suggests you're cutting winners short.
+
+### Trade details table
+
+Below the scatter plot, a sortable table lists every trade with MAE/MFE data: date, symbol, side, MAE, MFE, setup, and net P&L. This lets you drill into specific trades that caught your eye on the scatter plot.
+
+## Filtering
+
+You can filter MAE/MFE analysis by:
+
+- **Date range** — Last 7, 30, 90, or 365 days
+- **Symbol** — Focus on a specific contract (e.g., just ES or just MNQ)
+- **Account** — Via the sidebar account switcher
+
+Symbol filtering is particularly useful here since MAE/MFE values are inherently symbol-specific — 2 points of MAE means something very different on ES ($100/contract) vs. MES ($10/contract).
+
+## Which contracts have MAE/MFE data?
+
+MAE and MFE are calculated automatically for **ES, MES, NQ, and MNQ** trades — the contracts where TurtleMetrics stores intraday price data. The calculation runs in the background using 1-minute candle data, so there may be a short delay before values appear on newly closed trades.
+
+Trades on other contracts won't have MAE/MFE values. They'll show "—" in analysis tables and won't appear on the scatter plot.
+
+## Actionable insights
+
+Here are some common patterns to look for:
+
+- **High avg MAE + winning trades**: You're right about direction but getting in too early or placing stops too tight. Consider wider entries or better timing
+- **High MFE + low efficiency**: You're in the right trades but giving back profits. Your exits may need work — consider trailing stops or target-based exits
+- **MAE:MFE ratio above 1.0**: On average, price moves further against you than in your favor. This is a structural problem worth addressing
+- **Red cluster at high MAE**: You're holding losers too long. Your stop loss discipline may need tightening
+
+## Related
+
+<CardGroup cols={2}>
+  <Card icon="shield-halved" href="/features/risk-reward" title="Risk/Reward Ratio">
+    Track your planned risk vs. actual reward per trade.
+  </Card>
+  <Card icon="crosshairs" href="/features/setup-analysis" title="Setup Analysis">
+    Compare MAE/MFE across your trading setups.
+  </Card>
+</CardGroup>
